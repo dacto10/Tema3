@@ -1,7 +1,6 @@
 package edaii.tema3;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 class RecursiveFuncsTest {
@@ -47,32 +46,5 @@ class RecursiveFuncsTest {
 		final String response = RecursiveFuncs.request(requestable, 5);
 		assertEquals(null, response);
 		assertEquals(5, requestable.getNumAttempts());
-	}
-}
-
-class TestRequestable implements Requestable {
-	private String url;
-	private String content;
-	private int numFails;
-	private int numAttempts;
-
-	public TestRequestable(String url, String content, int numFails) {
-		this.url = url;
-		this.content = content;
-		this.numFails = numFails;
-		this.numAttempts = 0;
-	}
-
-	public String request() throws IOException {
-		numAttempts++;
-		if (content != null && numAttempts > numFails) {
-			return content;
-		} else {
-			throw new IOException("Can't establish connection to '" + this.url + "'");
-		}
-	}
-
-	public int getNumAttempts() {
-		return numAttempts;
 	}
 }
